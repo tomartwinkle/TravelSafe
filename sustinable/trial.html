@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Route Finder</title>
+    <style>
+        .form-container { margin: 20px; }
+        input, button { margin: 10px 0; }
+        #route-info { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <label for="origin">Origin:</label>
+    <input type="text" id="origin" placeholder="Enter origin">
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" placeholder="Enter destination">
+    <label for="departure_time">Departure Time (YYYY-MM-DD HH:MM:SS):</label>
+    <input type="text" id="departure_time" placeholder="e.g., 2025-01-25 08:00:00">
+    <button onclick="findRoute()">Find Sustainable Route</button>
+</div>
+
+<div id="route-info"></div>
+
+<script>
+function findRoute() {
+    const origin = document.getElementById('origin').value;
+    const destination = document.getElementById('destination').value;
+    const departure_time = document.getElementById('departure_time').value;
+
+    fetch('http://127.0.0.1:5000/get_route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ origin, destination, departure_time })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.routes) {
+            // Display route details
+            let routesHtml = "<h3>All Routes:</h3>";
+            data.routes.forEach(route => {
+                routesHtml += `
+                    <div>
+                        <strong>Total Distance:</strong> ${route.total_distance} km<br>
+                        <strong>Total Duration:</strong> ${route.total_duration} mins<br>
+                        <strong>Estimated Emissions:</strong> ${route.estimated_emissions} kg CO2<br><br>
+                    </div>
+                `;
+            });
+
+            // Display the sustainable route
+            const sustainableRoute = data.sustainable_route;
+            const sustainableRouteInfo = `
+                <h3>Sustainable Route:</h3>
+                <strong>Total Distance:</strong> ${sustainableRoute.total_distance} km<br>
+                <strong>Total Duration:</strong> ${sustainableRoute.total_duration} mins<br>
+                <strong>Estimated Emissions:</strong> ${sustainableRoute.estimated_emissions} kg CO2
+            `;
+            
+            document.getElementById('route-info').innerHTML = routesHtml + sustainableRouteInfo;
+        } else {
+            alert('No routes found');
+        }
+    })
+    .catch(err => alert('Error fetching data from backend.'));
+}
+</script>
+
+</body>
+</html>
