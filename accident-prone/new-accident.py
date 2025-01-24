@@ -4,8 +4,12 @@ import polyline
 import math
 import csv
 import io
+from flask_cors import CORS
+
+
 
 app = Flask(__name__)
+CORS(app)
 
 # Google API Key
 GOOGLE_API_KEY = "AIzaSyAyyAyxzjBMd5FgUCoWRpG335omtxh7woA"
@@ -36,17 +40,21 @@ def fetch_accident_data(lat, lng, radius=2000):
     places_data = response.json()
     accidents = []
     for result in places_data.get("results", []):
-        accidents.append({
-            "area": result.get("name", "Unknown Area"),
-            "latitude": result["geometry"]["location"]["lat"],
-            "longitude": result["geometry"]["location"]["lng"],
-            "accident_count": result.get("user_ratings_total", 0),  # Number of ratings as a proxy
-        })
+        accident_count = result.get("user_ratings_total", 0)
+        if accident_count>30: 
+            accidents.append({
+                "area": result.get("name", "Unknown Area"),
+                "latitude": result["geometry"]["location"]["lat"],
+                "longitude": result["geometry"]["location"]["lng"],
+                "accident_count": result.get("user_ratings_total", 0),  # Number of ratings as a proxy
+            })
     return accidents
 
 # Endpoint to get accident-prone areas along a route and return a CSV
 @app.route("/get-accident-prone-areas-csv", methods=["POST"])
 def get_accident_prone_areas_csv():
+    print("Request received:", request.json)  # Debugging line
+    
     data = request.json
     source = data.get("source")
     destination = data.get("destination")
