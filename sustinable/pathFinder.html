@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Route Finder</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef5ee;
+            color: rgb(4, 65, 6);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styling */
+        h1 {
+            background-color: #0a2c04;
+            color: #00FF00;
+            font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;  /* Green color for the heading */
+            text-align: center;
+            font-size:43px;
+            padding: 20px;
+            margin: 0;
+        }
+
+        /* Map container style */
+        #map {
+            
+           padding-top: 100px;
+            height: 500px;
+            width: 100%;
+padding-bottom: 700px;
+        }
+        .form-container {
+    font-family: sans-serif ;
+    display: flex;
+    gap: 30px;
+padding-bottom: 50px;
+    margin-left: 10px;
+    margin-top: 30px;
+}
+input {
+    gap: 10px;
+padding: 10px;
+    border-radius: 30px;
+}
+.inputs{
+    display: flex;
+    gap: 30px;
+}
+label{
+    margin-top:25px ;
+    font-size: 20px;
+}
+button{
+   background-color: rgba(27, 209, 27, 0.907);
+   color: black;
+padding: 5px;
+border-radius: 20px;
+
+}
+        
+        .form-container {
+            display: flex;
+            margin: 20px auto;
+            padding: 20px;
+            width: 100%;
+        
+            background-color: #dae7d2;
+            height: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgb(5, 72, 6);
+        }
+
+        /*
+        input, button {
+            display: flex;
+            width: 30%;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            gap: 5px;
+            border: 1px solid #333;
+            background-color: #2a2a2a;
+            color: white;
+        }
+
+        input::placeholder, button {
+            color: #aaa;
+        }
+.inputs{
+    display: flex;
+    gap:10px;
+}
+
+        button:hover {
+            background-color: #00FF00;
+            border-color: #00FF00;
+            cursor: pointer;
+            
+        }
+*/
+        /* Route information section */
+        #route-info {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #d8f0d7;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Styling for the directions list */
+        #directions-list {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #effae8;
+            border-radius: 8px;
+        }
+
+        /* Styling for the headings inside route info */
+        #route-info h3, #directions-list h4 {
+            color: #072d07;
+        }
+#route-info
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 30px;
+    border:2px solid white;
+    border-radius: 15px;
+}
+        /* Styling for the directions list items */
+        #directions-list ol {
+            padding-left: 20px;
+        }
+
+        #directions-list li {
+            color: #ccc;
+            margin-bottom: 10px;
+        }
+        
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyyAyxzjBMd5FgUCoWRpG335omtxh7woA&libraries=places&callback=initMap" async defer></script>
+</head>
+<body>
+
+<h1>Real-Time Sustainable Path Generator</h1>
+
+<div class="form-container">
+    <div class="inputs">
+    <label for="origin">Origin:</label>
+    <input type="text" id="origin" placeholder="Enter origin">
+    <label for="destination">Destination:</label>
+    <input type="text" id="destination" placeholder="Enter destination">
+    <label for="departure_time">Departure Time (YYYY-MM-DD HH:MM:SS):</label>
+    <input type="text" id="departure_time" placeholder="e.g., 2025-01-25 08:00:00">
+    </div>
+    <button onclick="findRoute()">Find Sustainable Route</button>
+</div>
+
+<div id="map"></div>
+<div id="route-info"></div>
+<div id="directions-list"></div>
+
+<script>
+let map, directionsService, directionsRenderer;
+
+function initMap() {
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 28.6139, lng: 77.2090 },  // Default center for Delhi, India
+        zoom: 5  // Adjust zoom level as needed
+    });
+
+    directionsService = new google.maps.DirectionsService();
+    directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(map);
+}
+
+function findRoute() {
+    const origin = document.getElementById('origin').value;
+    const destination = document.getElementById('destination').value;
+    const departure_time = document.getElementById('departure_time').value;
+
+    fetch('http://127.0.0.1:5000/get_route', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ origin, destination, departure_time })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.routes) {
+            // Clear any existing routes
+            directionsRenderer.setDirections({ routes: [] });
+            document.getElementById('directions-list').innerHTML = '';  // Clear existing directions
+
+            // Display all routes and render them on the map
+            let routesHtml = "<h3>All Routes:</h3>";
+            data.routes.forEach((route, index) => {
+                routesHtml += `
+                    <div>
+                        <strong>Total Distance:</strong> ${route.total_distance} km<br>
+                        <strong>Total Duration:</strong> ${route.total_duration} mins<br>
+                        <strong>Estimated Emissions:</strong> ${route.estimated_emissions} kg CO2<br><br>
+                `;
+
+                // Render each route polyline on the map
+                const routeDetails = {
+                    origin: origin,
+                    destination: destination,
+                    waypoints: [],
+                    optimizeWaypoints: true,
+                    travelMode: 'DRIVING',
+                    provideRouteAlternatives: true
+                };
+
+                // Create a DirectionsRenderer for each route
+                const renderer = new google.maps.DirectionsRenderer({
+                    polylineOptions: {
+                        strokeColor: index === data.routes.length - 1 ? 'green' : 'blue', // Green for the sustainable route
+                        strokeWeight: 5
+                    },
+                    map: map
+                });
+
+                directionsService.route(routeDetails, (response, status) => {
+                    if (status === 'OK') {
+                        renderer.setDirections(response);
+                        
+                        // Get step-by-step instructions for this route
+                        if (index === data.routes.length - 1) { // For the sustainable route
+                            displayRouteInstructions(response.routes[0].legs[0].steps);
+                        }
+                    }
+                });
+            });
+
+            // Display the sustainable route
+            const sustainableRoute = data.sustainable_route;
+            const sustainableRouteInfo = `
+                <h3>Sustainable Route:</h3>
+                <strong>Total Distance:</strong> ${sustainableRoute.total_distance} km<br>
+                <strong>Total Duration:</strong> ${sustainableRoute.total_duration} mins<br>
+                <strong>Estimated Emissions:</strong> ${sustainableRoute.estimated_emissions} kg CO2
+            `;
+            document.getElementById('route-info').innerHTML = routesHtml + sustainableRouteInfo;
+        } else {
+            alert('No routes found');
+        }
+    })
+    .catch(err => alert('Error fetching data from backend.'));
+}
+
+// Function to display step-by-step directions
+// Function to display step-by-step directions
+function displayRouteInstructions(steps) {
+    let stepIndex = 0;
+    const instructionsDiv = document.getElementById('directions-list');
+    
+    // Initially clear any existing directions
+    instructionsDiv.innerHTML = '';
+    
+    // Display each step one by one, updating every 2 seconds
+    const showStep = () => {
+        if (stepIndex < steps.length) {
+            instructionsDiv.innerHTML = `<h4>Step ${stepIndex + 1}:</h4><p>${steps[stepIndex].instructions}</p>`;
+            stepIndex++;
+            setTimeout(showStep, 1000);  // Show next step after 2 seconds
+        }
+    };
+
+    showStep();  // Start displaying steps
+}
+
+</script>
+
+</body>
+</html>
