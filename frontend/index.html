@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelBuddy</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="tansition.js"></script>
+<link href="1.css" rel="stylesheet"/>
+
+</head>
+<body>
+  <div class="page1">
+  <div class="header">
+    <h1>TravelBuddy</h1>
+    <ul class="left">
+      <li>Features</li>
+      <li>Timeline</li>
+      <li>Contact</li>
+    </ul>
+    <ul class="right">
+      <li>
+      <a href="login.html">
+        <button>Log in</button></li>
+       </a>
+      <li><button>Sign up</button></li>
+    </ul>
+  </div>
+  
+  <div class="line"></div>
+
+  <div class="container1">
+    <div id="text1">
+    <h2 style="color: white; font-size: 60px;" >AI POWERED</h2>
+    <h3 style="color: rgb(49, 124, 49); font-size: 55px; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-weight: 500;">TRAFFIC OPTIMISER</h3>
+    <p style="color: rgb(148, 144, 144);">
+      + Traffic congestion costs the global economy over $87 billion annually in lost productivity and fuel wastage.
+      <br><br>
+      + Adaptive traffic management systems can reduce travel times by up to 25% and emissions by 15%, promoting sustainable and efficient urban travel.
+      <br><br></p>
+      <h4 style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 24px; font-weight: 800; color: rgba(58, 87, 46, 0.751);"> Let TravelBuddy reduce your everyday hastle.</h4>
+      <p style="font-size: 20px; font-weight: 100; margin-top: 15px;">
+      We'll automate real time traffic tracking, provide actionable insights,
+      and offer personalized recommendations and sustainable routes focusing on SDG 11.</p>
+  </div>
+  <div class="charts">
+    <h2 style="margin-bottom:30px; text-align: center; color: rgb(7, 107, 40); font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Monthly traffic analysis</h2>
+    <canvas id="lineChart" width="500" height="400"></canvas>
+  </div>
+</div>
+</div>
+
+
+<!--Page 2 -->
+<div class="bg2">
+<div class="banner" ><h2 style="font-size:45px;">   F        E        A        T        U        R        E        S </h2></div>
+<div class="page2">
+  <div class="f1">
+    <div id="text2">
+    <h1 style="margin-left: 50px;">Traffic data Tracking </h1>
+    <p>Leveraging live data from vehicles and infrastructure, this feature provides accurate traffic insights, highlights congestion, and suggests optimized routes. It ensures faster commutes while reducing fuel consumption and emissions for sustainable urban travel.
+      </p>
+    </div>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqfGaTulCD9eoWDXYfus5qS1wiNFeaMkoQcA&s">
+  </div>
+</div>
+</div>
+<!--page 3-->
+
+<div class="page3">
+  <div class="pi">
+   <h2 style="padding-top: 30px;margin-bottom: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: rgba(185, 238, 201, 0.773);">Travel Safe with Travel Buddy</h2>
+      <canvas id="pieChart" width="400" height="200"></canvas>
+  </div>
+  <p style="font-size: 40px; font-weight: 100; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; width: 700px; 
+ text-align: left; height: auto; margin-top: 170px; margin-left:200px;"> Our AI-powered solution is designed to address urban traffic challenges by combining advanced technologies with real-time insights. By integrating adaptive traffic signal control, sustainable routing, and user-friendly tools, we aim to create a smarter, safer, and greener commuting experience.</p>
+</div>
+<!--Page 4-->
+<div class="bg3">
+<div class="page4">
+  <h5 style="padding-top: 10px; margin-left: 1200px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 20px;">TravelBuddy</h5>
+ <h1 style="font-size: 60px;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 700; padding-top: 40px; margin-left: 200px; color: rgba(95, 230, 90, 0.5);">MANAGE</h1>
+ <h2 style="font-style: italic; font-size: 40px; font-weight: 300; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin-top: 20px; margin-left: 200px;">Your</h2>
+ <h1 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-size: 60px; font-weight: 700; color: rgba(135, 221, 123, 0.711); margin-top: 340px; margin-left: 1100px;">Traffic</h1>
+<!--<button style="padding:8px 10px;margin-top: 50px; margin-left:170px; font-size: 20px; background-color: rgba(255, 255, 255, 0.841); color: black; border:2px solid rgba(10, 10, 10, 0.826); border-radius: 15px; font-weight: 600;" >Download App</button>-->
+</div>
+</div>
+<!--page5-->
+<div class="bg4">
+  <div class="f2">
+    <div id="text3">
+      <h1 style="margin-left: 10px; margin-top: 10px;">sustainable Routes</h1>
+      <p>From real-time insights to actionable recommendations, TravelBuddy ensures overall imporovement in the traffic system with integration of energy efficient pathways.
+        </p>
+      </div>
+      <img src="data:image/jpeg;base64,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">
+    </div>
+  </div>
+</div>
+<!--f3 -->
+<div class="bg5">
+<div class="page6">
+  <div class="f3">
+    <img src="https://img.freepik.com/free-photo/chalk-arrows-drawn-with-copy-space_23-2148456145.jpg?ga=GA1.1.1967874175.1733952115&semt=ais_hybrid">
+    <div id="text4">
+      <h1 style="margin-right: 10px; margin-top: 20px;">Test the Waters before you dive</h1>
+      <p>Helps users make better Travel and commute decisions by simulating the outcomes of time management, expenses, energy savings and other parameters.<br> Integrating AI into the Analysis and suggestion Simulator can make it more intelligent, interactive, and personalized. <br> Inculcating Risk assessment features and rerouting options.
+        </p>
+  </div>
+</div>
+</div>
+<div class="bg6">
+<!--f4-->
+<div class="page7">
+    <h1><a href="tracker.html">Traffic Tracking</a></h1>
+    <h1><a href="path.html">sustainable:  Forecasting  routes</a></h1>
+    <h1><a href="report.html">AI powered Optimised Solutions</a></h1>
+    <h1><a href="signal.html">Signal optimisation </a></h1>
+</div>
+</div>
+<!--timeline
+<div class="bg7">
+    <img src="https://github.com/tomartwinkle/BudgetBuddy/blob/main/Blue%20and%20White%20Minimalist%20Timeline%20Infographic%20(Business%20Cards%20(Portrait)).png?raw=true">
+  </div>
+-->
+<footer class="footer">
+  <div class="footer-row">
+    <div class="footer-column">
+      <h3>Contact Info</h3>
+      <p>9837294092 <br>4367292044<br>+91 4620293709<br> loremipsum@gmail.com <br> </p>
+    </div>
+    <div class="footer-column">
+      <h3>More About Us</h3>
+      <p>We strive to inspire kindness, innovation, and <br>trust in everything we do.</p>
+    </div>
+    <div class="footer-column">
+      <h3>Socials</h3>
+      <p>insta: @travelBuddy <br> facebook :travel_Buddy <br> Catch us on Linkdn and more!</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+.footer {
+
+  margin-top: 50px;
+  background-color: #33333384; 
+  color: #fff; 
+  font-family: Arial, sans-serif;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap; 
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 100px; 
+margin-top: 30px;
+margin-left: 120px;
+
+}
+
+.footer h3 {
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+</style>
+
+
+
+
+
+<script src="line.js"></script>
+<script src="pi.js"></script>
+<script src="tansition.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
