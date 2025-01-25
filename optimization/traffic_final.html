@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Generation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playwrite+IN:wght@100..400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: rgba(255, 255, 255, 0);
+            background-color: #000000;
+        }
+        h1 {
+            text-align: center;
+            color: #b8c1b5;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            margin-top: 100px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 0 9px 5px rgb(7, 74, 7);
+            padding-left: 30px;
+            padding-top: 10px;
+        }
+
+        
+        .input-group {
+            margin: 20px 0;
+
+        }
+
+        input[type="file"] {
+            display: inline-block;
+            padding: 10px;
+            font-size: 16px;
+            color: #080808;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+     
+        .image{
+         
+          width: 400px;
+          height: 600px;
+        }
+        .part1{
+
+            margin-top: 200px;
+    display: flex;
+    flex-direction: row;
+gap:150px;
+padding-bottom: 350px;
+        }
+        .text{
+            padding-left: 30px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        html {
+    scroll-behavior: smooth;
+  }
+  .bg2{
+    margin-top: 300px;
+    background-color: black;
+}
+.banner h2{
+    background-color: rgba(40, 43, 40, 0.199);
+    width: 1500px;
+    border-radius: 40px;
+    height:70px;
+    padding:25px 0px 0px 0px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: 400;
+    font-size: 35px;
+    text-align: center;
+    margin-top:0px;
+}
+.container1{
+    padding:150px;
+    padding-top: 140px;
+    display: flex;
+    flex-direction: row;
+    gap:100px;
+}
+#text1{
+    margin-left:50px;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;
+    display: flex;
+    flex-direction: column;
+  gap: 20px;
+}
+#text1 h2{
+    font-size: 55px;
+    font-weight: 500;
+}
+
+#text1 p{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
+.charts{
+    margin-left:30px;
+    padding-bottom: 30px;
+}
+  
+.pi{
+    color: gray;
+    margin-left:120px;
+    text-align: center;
+    padding-top: 70px;
+    width: 400px;
+    height: 600px;
+}
+.page2 {
+    background-color: black;
+    margin-top: 70px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    border: 1px solid gray;
+    border-radius: 20px;
+box-shadow: rgba(90, 86, 86, 0.2);
+}
+
+.f1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 50px; 
+}/* styles.css */
+.page4 {
+  font-family: Arial, sans-serif;
+  background-color: #000000;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.box {
+  width: 500px;
+  padding: 20px;
+  background-color: black;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 4px 8px rgba(0, 100, 0, 0.8);
+  border-radius: 8px;
+  text-align: justify;
+  margin: 20px;
+
+}
+
+.summary {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#text2 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px; 
+}
+
+#text2 h1 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size: 50px; 
+    color: #888484; 
+}
+
+#text2 p {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 18px;
+    line-height: 1.6; 
+    color: #858383;
+}
+
+.f1 img {
+    width: 500px; 
+    height: auto; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+}
+.page3{
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+}
+.bg3{
+    background-color: black;
+}
+*{
+    margin: 0%;
+    padding: 0%;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+.page1{
+    background-color: black;
+    padding: 0%;
+    margin: 0%;
+}
+.header{
+    background-color: black;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top:30px;
+    display: flex;
+    height: 70px;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.396);
+}
+h1{
+    font-size: 20px;
+    font-weight: 700;
+    margin-left: 150px
+}
+.left{
+    list-style: none;
+    display: flex;
+    text-align: left;
+    gap:25px;
+    justify-content: flex-start;
+    margin-right:600px;
+    padding-top: 5px;
+}
+@media (max-width: 768px) {
+    .container, .part1 {
+        flex-direction: column;
+        width: 90%;
+    }
+    .text {
+        text-align: center;
+    }
+    img {
+        width: 100%;
+        margin: auto;
+    }
+}
+
+table {
+    margin-top: 700px;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 200px;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #033707;
+        }
+.right{
+    gap:25px;
+    margin-right:150px;
+    list-style: none;
+    display: flex;
+    text-align: right;
+    justify-content: flex-end;
+}
+button{
+    background-color: black;
+    padding:6px 8px;
+    border-radius: 8px;
+    align-items: center;
+}
+.buttons_hori{
+    display: flex;
+    margin-top: 50px;
+margin-left: 550px;
+gap: 100px;
+}
+.buttons_hori button{
+    background-color: rgb(42, 128, 27);
+    color: black;
+    border: 2px solid black ;
+    padding: 15px;
+}
+.buttons_hori button {
+    transition: transform 0.2s;
+}
+.buttons_hori button:hover {
+    transform: scale(1.1);
+}
+table {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+th, td {
+    text-align: center;
+}
+
+.traffic{
+    margin-top: 300px;
+    display: flex;
+    flex-direction: column;
+}
+.page4{
+    background: black;
+}
+    </style>
+</head>
+<body>
+    <div class="page1">
+        <div class="header">
+          <h1>TravelBuddy</h1>
+          <ul class="left">
+            <li>Features</li>
+            <li>Timeline</li>
+            <li>Contact</li>
+          </ul>
+          <ul class="right">
+            <li>
+            <a href="login.html">
+              <button>Log in</button></li>
+             </a>
+            <li><button>Sign up</button></li>
+          </ul>
+        </div>
+<div class="part1">
+    <div class="text">
+        <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-weight: 900; font-size: 55px;"
+         >Traffic Congestion & Signal Optimisation</h1>
+        <h1 style="color: rgb(24, 171, 24);">Report Generator</h1>
+        <p></p>
+    </div>
+    <img style="border-radius: 15px;margin-right: 200px; box-shadow:0 0 5px 0 #1ed54981; width: 500px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPWA6zKDvPA7q3gPRONA1AoScVL-xatu8Zvw&s">
+</div>
+
+    <div class="container">
+        
+        <div class="input-group" style="padding-top:30px;">
+            <label style="color: black;" for="csvFile">Choose a CSV file:</label>
+            <input type="file" id="csvFile" accept=".csv">
+        </div>
+        <button onclick="uploadFile()">Upload and Process</button>
+
+
+        <div id="message" class="message"></div>
+
+        <div id="aiReport" class="message"></div> 
+    </div>
+    <div class="report_heading">
+   
+       <div class="buttons_hori">
+           <button>Traffic Congestion</button>
+           <button>Signal Optimisation</button>
+       </div>
+</div>
+<div class="bg2">
+    <div class="banner" ><h2 style="font-size:45px;">   F        E        A        T        U        R        E        S </h2></div>
+    <div class="page2">
+      <div class="f1">
+        <div id="text2">
+        <h1 style="margin-left: 50px;">Traffic Congestion Analysis </h1>
+        <p>Leveraging live data from vehicles and infrastructure, this feature provides accurate traffic insights, highlights congestion and gives data on traffic flow. It ensures faster commutes..
+          </p>
+        </div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqfGaTulCD9eoWDXYfus5qS1wiNFeaMkoQcA&s">
+      </div>
+    </div>
+    </div>
+    <!--page 3-->
+    
+    <div class="page3">
+      <div class="pi">
+       <h2 style="padding-top: 30px;margin-bottom: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: rgba(185, 238, 201, 0.773);">Signal Optimisation</h2>
+         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxzfOA_CKnnSkNCfB8qE3jAd5bxIGeHlcDZA&s" style="width: 400px; height: 300px;">
+      </div>
+      <p style="font-size: 40px; font-weight: 100; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; width: 700px; 
+     text-align: left; height: auto; margin-top: 170px; margin-left:200px;"> Traffic signal optimization involves designing and timing traffic lights to improve the flow of vehicles and pedestrians while minimizing delays, congestion, and fuel consumption. </p>
+    </div>
+
+
+
+<div class="page4">
+<div class="Traffic">
+   <p ><em>Traffic Signal Analysis Summary Report </em><br>
+    <br><br>
+    
+   
+    <div class="container">
+        <div class="box">
+          <p class="summary"><strong> Control and Congestion Levels </strong><br>
+            - It appears that intersections with adaptive signal control systems tended to experience lower
+          congestion levels. This suggests that such systems may be more effective at managing variable
+          traffic volumes and reducing wait times.</p>
+        </div>
+        <div class="box">
+          <p class="summary"><strong>Impact of Average Speed on Signal Timing</strong><br>
+            - A notable correlation was observed between average vehicle speeds and signal timing. Areas
+          where average speeds were maintained above a certain threshold corresponded to more optimal
+          signal phases, indicating a well-optimized traffic light cycle.<br><br></p>
+        </div>
+        <div class="box">
+          <p class="summary"><strong> High Congestion Areas</strong><br>
+            - Specific intersections identified with chronic congestion issues were typically controlled by fixed
+          time signals. Consideration for implementing adaptive control could potentially alleviate traffic
+          bottlenecks and improve travel times.</p>
+        </div>
+        <div class="box">
+          <p class="summary"><strong>Response to Traffic Fluctuations</strong><br>
+            - Signals that incorporated feedback mechanisms (e.g., sensors) showed a positive impact on
+          handling sudden spikes in vehicle counts, effectively reducing congestion during peak periods. This
+          indicates a need for more widespread implementation of such technologies.</p>
+        </div>
+      </div>
+
+    </div>
+      <!---
+    1. <strong> Control and Congestion Levels </strong><br>
+      - It appears that intersections with adaptive signal control systems tended to experience lower
+    congestion levels. This suggests that such systems may be more effective at managing variable
+    traffic volumes and reducing wait times.<br><br>
+    2. <strong>Impact of Average Speed on Signal Timing</strong><br>
+      - A notable correlation was observed between average vehicle speeds and signal timing. Areas
+    where average speeds were maintained above a certain threshold corresponded to more optimal
+    signal phases, indicating a well-optimized traffic light cycle.<br><br>
+    3. <strong>Efficiency:</strong><br>
+      - Signals that were programmed to respond to real-time traffic conditions resulted in decreased
+    average vehicle counts during peak hours. This adaptability likely facilitated better flow, thus
+    enhancing overall signal efficiency.<br><br>
+    4. <strong> High Congestion Areas</strong><br>
+      - Specific intersections identified with chronic congestion issues were typically controlled by fixed
+    time signals. Consideration for implementing adaptive control could potentially alleviate traffic
+    bottlenecks and improve travel times.<br><br>
+    5. <strong>Response to Traffic Fluctuations</strong><br>
+      - Signals that incorporated feedback mechanisms (e.g., sensors) showed a positive impact on
+    handling sudden spikes in vehicle counts, effectively reducing congestion during peak periods. This
+    indicates a need for more widespread implementation of such technologies.<br><br>
+    6.<strong> Performance Variance</strong><br>
+      - Differences in signal effectiveness were noted across various times of the day. Traffic signals
+    that adjust timing based on historical traffic patterns proved to be more effective during anticipated
+    peak times.<br><br>
+    7. <strong>Recommendations for Improvement</strong><br>
+      - It is recommended to explore the deployment of adaptive signal controls at critical junctions
+    currently under fixed control. This transition could enhance response times and accommodate
+    fluctuating traffic volumes, leading to improved overall traffic flow.<br><br>
+    <strong>Conclusion</strong><br><br>
+    The findings from the traffic signal analysis underscore the importance of signal control systems in
+    mitigating congestion and improving vehicle movement efficiency. By focusing on adaptive and
+    responsive signal mechanisms, it is possible to create a more effective traffic management strategy
+    that can adapt to real-time conditions and enhance the overall travel experience. Further investment
+    in technology and infrastructure aimed at signal improvements is warranted based on this analysis</p>
+</div>-->
+<div class="signal">
+    
+   <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Road Name</th>
+            <th>Vehicle Count</th>
+            <th>Average Speed</th>
+            <th>Congestion Level</th>
+            <th>Signal Control</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>Anna Salai (Mount Road)</td>
+            <td>4500</td>
+            <td>20</td>
+            <td>Low</td>
+            <td>Normal Green Light</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>GST Road</td>
+            <td>3700</td>
+            <td>25</td>
+            <td>Low</td>
+            <td>Normal Green Light</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>OMR (Old Mahabalipuram Rd)</td>
+            <td>5200</td>
+            <td>18</td>
+            <td>Low</td>
+            <td>Normal Green Light</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Poonamallee High Road</td>
+            <td>3100</td>
+            <td>22</td>
+            <td>Low</td>
+            <td>Normal Green Light</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Velachery Main Road</td>
+            <td>2900</td>
+            <td>24</td>
+            <td>Low</td>
+            <td>Normal Green Light</td>
+        </tr>
+        <!-- Additional rows can be added here -->
+    </tbody>
+</table>
+
+
+</div>
+<script>
+     document.getElementById('traffic-analysis-btn').onclick = function() {
+        document.getElementById('traffic-analysis').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    document.getElementById('signal-analysis-btn').onclick = function() {
+        document.getElementById('signal-analysis').scrollIntoView({ behavior: 'smooth' });
+    };
+    function uploadFile() {
+        const fileInput = document.getElementById('csvFile');
+        const messageDiv = document.getElementById('message');
+        const aiReportDiv = document.getElementById('aiReport');
+        
+        if (!fileInput.files.length) {
+            messageDiv.textContent = 'Please select a CSV file.';
+            messageDiv.className = 'message error';
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // Clear previous messages
+        messageDiv.textContent = '';
+        messageDiv.className = '';
+        aiReportDiv.textContent = '';  // Clear AI report text
+        aiReportDiv.className = '';
+
+        console.log('Sending request to backend...');
+
+        // Update this URL if your Flask app is running locally or on a specific server
+        fetch('http://127.0.0.1:5000/process_csv', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);  // Debugging: Log the backend response
+            if (data.ai_report) {
+                aiReportDiv.className = 'message success';
+                aiReportDiv.innerHTML = '<strong>AI Report:</strong><br><pre>' + data.ai_report + '</pre>';
+            } else {
+                messageDiv.textContent = data.error || 'Unknown error occurred.';
+                messageDiv.className = 'message error';
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);  // Debugging: Log any error in the request
+            messageDiv.textContent = 'Error uploading file: ' + error.message;
+            messageDiv.className = 'message error';
+        });
+    }
+</script>
+
+</body>
+</html>
