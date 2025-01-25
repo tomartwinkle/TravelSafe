@@ -11,12 +11,12 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-# Google API Key
+
 GOOGLE_API_KEY = "AIzaSyAyyAyxzjBMd5FgUCoWRpG335omtxh7woA"
 
-# Helper function: Calculate distance using Haversine formula
+
 def haversine(lat1, lon1, lat2, lon2):
-    R = 6371  # Earth radius in km
+    R = 6371 
     d_lat = math.radians(lat2 - lat1)
     d_lon = math.radians(lon2 - lon1)
     a = (
@@ -28,7 +28,7 @@ def haversine(lat1, lon1, lat2, lon2):
     c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
     return R * c
 
-# Fetch traffic/incident data from Google Places API
+
 def fetch_accident_data(lat, lng, radius=2000):
     places_url = (
         f"https://maps.googleapis.com/maps/api/place/nearbysearch/json"
@@ -46,14 +46,14 @@ def fetch_accident_data(lat, lng, radius=2000):
                 "area": result.get("name", "Unknown Area"),
                 "latitude": result["geometry"]["location"]["lat"],
                 "longitude": result["geometry"]["location"]["lng"],
-                "accident_count": result.get("user_ratings_total", 0),  # Number of ratings as a proxy
+                "accident_count": result.get("user_ratings_total", 0), 
             })
     return accidents
 
-# Endpoint to get accident-prone areas along a route and return a CSV
+
 @app.route("/get-accident-prone-areas-csv", methods=["POST"])
 def get_accident_prone_areas_csv():
-    print("Request received:", request.json)  # Debugging line
+    print("Request received:", request.json) 
     
     data = request.json
     source = data.get("source")
@@ -75,27 +75,27 @@ def get_accident_prone_areas_csv():
     if route_data["status"] != "OK":
         return jsonify({"error": "No route found"}), 404
 
-    # Decode the polyline from the route
+   
     polyline_data = route_data["routes"][0]["overview_polyline"]["points"]
     route_points = polyline.decode(polyline_data)
 
-    # Fetch accident data for each route point
+    
     accident_prone_areas = []
     for point in route_points:
         lat, lng = point
         accidents = fetch_accident_data(lat, lng)
         accident_prone_areas.extend(accidents)
 
-    # Remove duplicates based on coordinates
+   
     unique_areas = {f"{area['latitude']},{area['longitude']}": area for area in accident_prone_areas}.values()
 
-    # Create a CSV response
+   
     output = io.StringIO()
     csv_writer = csv.DictWriter(output, fieldnames=["area", "latitude", "longitude", "accident_count"])
     csv_writer.writeheader()
     csv_writer.writerows(unique_areas)
 
-    # Make sure the file is ready to be downloaded
+   
     output.seek(0)
 
     return Response(
