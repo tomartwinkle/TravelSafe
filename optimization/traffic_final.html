@@ -570,7 +570,7 @@ th, td {
             <td>Low</td>
             <td>Normal Green Light</td>
         </tr>
-        <!-- Additional rows can be added here -->
+       
     </tbody>
 </table>
 
@@ -599,22 +599,22 @@ th, td {
         const formData = new FormData();
         formData.append('file', file);
 
-        // Clear previous messages
+        
         messageDiv.textContent = '';
         messageDiv.className = '';
-        aiReportDiv.textContent = '';  // Clear AI report text
+        aiReportDiv.textContent = '';  
         aiReportDiv.className = '';
 
         console.log('Sending request to backend...');
 
-        // Update this URL if your Flask app is running locally or on a specific server
+        
         fetch('http://127.0.0.1:5000/process_csv', {
             method: 'POST',
             body: formData
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);  // Debugging: Log the backend response
+            console.log(data);  
             if (data.ai_report) {
                 aiReportDiv.className = 'message success';
                 aiReportDiv.innerHTML = '<strong>AI Report:</strong><br><pre>' + data.ai_report + '</pre>';
@@ -624,7 +624,7 @@ th, td {
             }
         })
         .catch(error => {
-            console.error('Error:', error);  // Debugging: Log any error in the request
+            console.error('Error:', error); 
             messageDiv.textContent = 'Error uploading file: ' + error.message;
             messageDiv.className = 'message error';
         });
