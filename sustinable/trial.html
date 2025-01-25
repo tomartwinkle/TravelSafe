@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustainable Route Finder</title>
     <style>
-        /* Map container style */
-        #map {
+       
             height: 500px;
             width: 100%;
         }
 
-        /* Simple form layout */
+     
         .form-container {
             margin: 20px;
         }
@@ -24,7 +23,6 @@
             margin-top: 20px;
         }
 
-        /* Styling for the directions list */
         #directions-list {
             margin-top: 20px;
         }
@@ -52,8 +50,8 @@ let map, directionsService, directionsRenderer;
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 28.6139, lng: 77.2090 },  // Default center for Delhi, India
-        zoom: 5  // Adjust zoom level as needed
+        center: { lat: 28.6139, lng: 77.2090 },  
+        zoom: 5  
     });
 
     directionsService = new google.maps.DirectionsService();
@@ -74,11 +72,9 @@ function findRoute() {
     .then(response => response.json())
     .then(data => {
         if (data.routes) {
-            // Clear any existing routes
+      
             directionsRenderer.setDirections({ routes: [] });
-            document.getElementById('directions-list').innerHTML = '';  // Clear existing directions
-
-            // Display all routes and render them on the map
+            document.getElementById('directions-list').innerHTML = ''; 
             let routesHtml = "<h3>All Routes:</h3>";
             data.routes.forEach((route, index) => {
                 routesHtml += `
@@ -88,7 +84,7 @@ function findRoute() {
                         <strong>Estimated Emissions:</strong> ${route.estimated_emissions} kg CO2<br><br>
                 `;
 
-                // Render each route polyline on the map
+        
                 const routeDetails = {
                     origin: origin,
                     destination: destination,
@@ -98,10 +94,10 @@ function findRoute() {
                     provideRouteAlternatives: true
                 };
 
-                // Create a DirectionsRenderer for each route
+              
                 const renderer = new google.maps.DirectionsRenderer({
                     polylineOptions: {
-                        strokeColor: index === data.routes.length - 1 ? 'green' : 'blue', // Green for the sustainable route
+                        strokeColor: index === data.routes.length - 1 ? 'green' : 'blue',
                         strokeWeight: 5
                     },
                     map: map
@@ -110,16 +106,15 @@ function findRoute() {
                 directionsService.route(routeDetails, (response, status) => {
                     if (status === 'OK') {
                         renderer.setDirections(response);
-                        
-                        // Get step-by-step instructions for this route
-                        if (index === data.routes.length - 1) { // For the sustainable route
+                    
+                        if (index === data.routes.length - 1) { 
                             displayRouteInstructions(response.routes[0].legs[0].steps);
                         }
                     }
                 });
             });
 
-            // Display the sustainable route
+            
             const sustainableRoute = data.sustainable_route;
             const sustainableRouteInfo = `
                 <h3>Sustainable Route:</h3>
@@ -135,7 +130,7 @@ function findRoute() {
     .catch(err => alert('Error fetching data from backend.'));
 }
 
-// Function to display step-by-step directions
+
 function displayRouteInstructions(steps) {
     let directionsHtml = '<h4>Navigation Instructions:</h4><ol>';
     steps.forEach(step => {
