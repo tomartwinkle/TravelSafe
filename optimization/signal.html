@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Upload and Report Generation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .input-group {
+            margin: 20px 0;
+        }
+
+        input[type="file"] {
+            display: inline-block;
+            padding: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        pre {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>CSV File Upload and AI Report Generation</h1>
+        <div class="input-group">
+            <label for="csvFile">Choose a CSV file:</label>
+            <input type="file" id="csvFile" accept=".csv">
+        </div>
+        <button onclick="uploadFile()">Upload and Process</button>
+
+        <div id="message" class="message"></div>
+
+        <div id="aiReport" class="message"></div> <!-- To display the AI report -->
+    </div>
+
+    <script>
+        function uploadFile() {
+            const fileInput = document.getElementById('csvFile');
+            const messageDiv = document.getElementById('message');
+            const aiReportDiv = document.getElementById('aiReport');
+            
+            if (!fileInput.files.length) {
+                messageDiv.textContent = 'Please select a CSV file.';
+                messageDiv.className = 'message error';
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Clear previous messages
+            messageDiv.textContent = '';
+            messageDiv.className = '';
+            aiReportDiv.textContent = '';  // Clear AI report text
+            aiReportDiv.className = '';
+
+            console.log('Sending request to backend...');
+
+            // Update this URL if your Flask app is running locally or on a specific server
+            fetch('http://127.0.0.1:5000/process_csv', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);  // Debugging: Log the backend response
+                if (data.ai_report) {
+                    aiReportDiv.className = 'message success';
+                    aiReportDiv.innerHTML = '<strong>AI Report:</strong><br><pre>' + data.ai_report + '</pre>';
+                } else {
+                    messageDiv.textContent = data.error || 'Unknown error occurred.';
+                    messageDiv.className = 'message error';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);  // Debugging: Log any error in the request
+                messageDiv.textContent = 'Error uploading file: ' + error.message;
+                messageDiv.className = 'message error';
+            });
+        }
+    </script>
+
+</body>
+</html>
