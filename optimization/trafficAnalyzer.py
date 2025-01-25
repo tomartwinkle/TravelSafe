@@ -2,21 +2,21 @@ import logging
 from flask import Flask, request, jsonify, send_file
 import pandas as pd
 import os
-import requests  # Import requests to interact with the AI proxy
-from fpdf import FPDF  # For generating PDF reports
+import requests  
+from fpdf import FPDF  
 
 app = Flask(__name__)
 
-# Enable Flask logging
+
 app.logger.setLevel(logging.DEBUG)
 
-# Set a folder to store uploaded CSV files (you can change this path)
+
 UPLOAD_FOLDER = 'uploads'
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-# AI Proxy Token and URL for sending requests
+
 AIPROXY_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6IjIzZjIwMDQ5MDRAZHMuc3R1ZHkuaWl0bS5hYy5pbiJ9.1C8QpqZCx1Ik1aTaMlGHq26IJpupgdDAuOd1vEW7-_o'
 AI_URL = "https://aiproxy.sanand.workers.dev/openai/v1/chat/completions"
 
@@ -42,9 +42,7 @@ def process_csv():
             file_path = os.path.join(UPLOAD_FOLDER, file.filename)
             file.save(file_path)
             app.logger.debug(f'File saved at {file_path}')
-            
-            # Try specifying a different encoding when reading the CSV file
-            df = pd.read_csv(file_path, sep=',', encoding='utf-8')  # or use encoding='utf-16' if utf-8 still causes issues
+            df = pd.read_csv(file_path, sep=',', encoding='utf-8')  
 
             app.logger.debug('CSV file read successfully.')
             
@@ -74,11 +72,11 @@ def process_csv():
             
             ai_response = generate_report_from_ai(df)
 
-            # When generating the report
+         
             ai_response = generate_report_from_ai(df)
             
             if ai_response:
-                # Pass the original filename (file.filename) to the save report functions
+              
                 pdf_file_path = save_report_as_pdf(ai_response, file.filename)
                 txt_file_path = save_report_as_txt(ai_response, file.filename)
                 
@@ -127,13 +125,13 @@ def generate_report_from_ai(df):
 
 
 def save_report_as_pdf(report_text, input_filename):
-    # Extract the base filename without extension
+
     base_filename = os.path.splitext(input_filename)[0]
     
-    # Define the path for the PDF file
+   
     pdf_file_path = os.path.join(UPLOAD_FOLDER, f'{base_filename}_report.pdf')
     
-    # Create the PDF
+
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
@@ -143,20 +141,20 @@ def save_report_as_pdf(report_text, input_filename):
     pdf.ln(10)
     pdf.multi_cell(0, 10, report_text)
 
-    # Save the PDF to the specified path
+
     pdf.output(pdf_file_path)
     
     return pdf_file_path
 
 
 def save_report_as_txt(report_text, input_filename):
-    # Extract the base filename without extension
+  
     base_filename = os.path.splitext(input_filename)[0]
     
-    # Define the path for the TXT file
+
     txt_file_path = os.path.join(UPLOAD_FOLDER, f'{base_filename}_report.txt')
     
-    # Save the report text to the TXT file
+  
     with open(txt_file_path, 'w') as txt_file:
         txt_file.write(report_text)
     
@@ -167,15 +165,15 @@ from flask import render_template
 
 @app.route('/show_report/<filename>', methods=['GET'])
 def show_report(filename):
-    # Construct the path to the .txt file
+
     txt_file_path = os.path.join(UPLOAD_FOLDER, f'{filename}_report.txt')
     
     try:
-        # Open and read the content of the txt file
+     
         with open(txt_file_path, 'r') as file:
             report_content = file.read()
         
-        # Render the content in an HTML page
+       
         return render_template('report_page.html', report_content=report_content)
     
     except FileNotFoundError:
