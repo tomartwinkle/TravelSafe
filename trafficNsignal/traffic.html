@@ -26,14 +26,9 @@
         <input type="file" id="fileInput" name="file" accept=".csv" required>
         <button type="submit">Upload and Process</button>
     </form>
-
     <div id="response"></div>
-
     <script>
-        // Log when the script loads
         console.log('Frontend loaded.');
-
-        // Form submit event
         document.getElementById('uploadForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent the default form submission
 
@@ -44,17 +39,12 @@
                 alert('Please select a file');
                 return;
             }
-
             console.log('File selected:', file.name);
 
             const formData = new FormData();
             formData.append('file', file);
-
-            // Show loading message
             document.getElementById('response').innerHTML = 'Processing your file...';
             console.log('Sending file to backend...');
-
-            // Make a POST request to Flask backend
             fetch('http://127.0.0.1:5000/process_csv', {
                 method: 'POST',
                 body: formData
@@ -62,7 +52,7 @@
             .then(response => {
                 console.log('Response received:', response);
                 if (response.ok) {
-                    return response.blob();  // If the file is processed, return the file blob
+                    return response.blob();  
                 } else {
                     throw new Error('Error processing the file');
                 }
@@ -70,7 +60,7 @@
             .then(blob => {
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
-                link.download = 'processed_file.csv';  // Name of the processed file
+                link.download = 'processed_file.csv';  
                 link.click();
                 document.getElementById('response').innerHTML = 'File processed successfully! Click to download.';
                 console.log('File processed and ready for download.');
