@@ -83,7 +83,7 @@ font-family: sans-serif;
                 return;
             }
 
-            // Call the backend API to get accident-prone areas
+           
             try {
                 const response = await fetch("http://127.0.0.1:5000/get-accident-prone-areas-csv", {
                     method: "POST",
@@ -102,7 +102,7 @@ font-family: sans-serif;
                 const csvData = await response.text();
                 const accidentAreas = parseCSV(csvData);
 
-                // Display the route and accident-prone areas on the map
+                
                 displayRouteAndAccidents(source, destination, accidentAreas);
             } catch (error) {
                 console.error("Error fetching accident-prone areas:", error);
@@ -116,7 +116,7 @@ font-family: sans-serif;
             const headers = rows[0].split(",");
 
             for (let i = 1; i < rows.length; i++) {
-                if (!rows[i].trim()) continue; // Skip empty rows
+                if (!rows[i].trim()) continue; 
                 const values = rows[i].split(",");
                 const areaData = {};
                 headers.forEach((header, index) => {
@@ -145,7 +145,7 @@ font-family: sans-serif;
                 }
             );
 
-            // Add markers for accident-prone areas
+            
             accidentAreas.forEach((area) => {
                 const lat = parseFloat(area.latitude);
                 const lng = parseFloat(area.longitude);
@@ -165,7 +165,7 @@ font-family: sans-serif;
             });
         }
 
-        // Initialize the map
+    
         initMap();
     </script>
 </body>
