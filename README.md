@@ -82,9 +82,9 @@ This project strongly supports SDG 11: Sustainable Cities and Communities by:
 - Building resilience in urban mobility infrastructure through real-time adaptability.
 
 # Acknowledgements
-Developed by a dedicated team of student innovators representing MIT,Manipal at SRM IST during Nariyukti TechHack - Women's Hackathon 2024 hosted across all universities in India by ACM-W.
-Special thanks to mentors and organizers for providing the platform and resources to ideate and build solutions for real-world urban challenges and most importantly to **advocate and inspire women in tech**.
+Developed by a dedicated team of student innovators representing MIT,Manipal at SRM IST during Nariyukti TechHack - Women's Hackathon 2024 hosted across all universities in India by ACM-W.<br>
+Special thanks to mentors and organizers for providing the platform and resources to ideate and build solutions for real-world urban challenges and most <br>importantly to **advocate and inspire women in tech**.<br>
 # Team 
-Twinkle Tomar - 1st year , MIT Manipal (Team Lead)
-Shravani Sawant - 2nd year , MIT Manipal
-Soumya Jha - 2nd year , MIT Manipal
+Twinkle Tomar - 1st year , MIT Manipal (Team Lead)<br>
+Shravani Sawant - 2nd year , MIT Manipal<br>
+Soumya Jha - 2nd year , MIT Manipal<br>
